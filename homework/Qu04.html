@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu04.html</title>
+<script>
+    document.write("<h2>document.wirte()로 표만들기");
+    document.write("<hr>");
+
+        var multi = "<table border = '1'>";
+        
+        for(var x = 1; x<=2; x++){
+            multi+="<tr>";
+            
+                if(x==1){
+                    for(var y= -1; y<=9; y++){
+                        if(y == -1){
+                            multi += "<td> n</td>";   
+                        }
+                        else{
+                        multi += "<td>"+(y)+"</td>";
+                        }  
+                    }
+                }
+                else{
+                    for(var y= -1; y<=9; y++){
+                        if(y == -1){
+                            multi += "<td> n*n</td>";  
+                        }
+                        else{
+                         multi += "<td>"+(y*y)+"</td>";
+                        }
+                    }
+                 }
+            multi+="</tr>";
+        }
+
+        multi +="</table>";
+        document.write(multi);
+        
+</script>
+</head>
+<body>
+  
+</body>
+</html>
