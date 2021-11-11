@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu08.html</title>
+</head>
+<body>
+    <script>
+        var num = prompt("숫자를 입력하세요");
+        document.write("<h2>숫자의 첫째자리와 마지막자리가 같은지 비교</h1>");
+        document.write("<hr>");
+        document.write(num +"=>");
+
+        var lastNum = num % 10; // 숫자의 마지막
+        var i = 0;
+        // document.write("num의 길이는 "+num.length + "<br>"); 
+        // while(i<num.length-1){
+        //   num= Math.floor(num/10);
+        //   document.write(i+"번째실행"+ num+ "<br>");
+        //   i++;    => 왜 이코드는 다이렉트로 while(i<num.length)로 받으면 1번 실행되고 멈추는가
+        // }
+      
+      
+       var length = num.length;
+       while(i< length-1){
+        num = Math.floor(num/10);
+      //  document.write(i+"번째실행"+num+ "<br>"); 실행 확인용 문장
+        i++;
+       }
+       
+       
+        if(lastNum ==num){
+            document.write("처음과 끝이 같음");
+        }else{
+            document.write("처음과 끝이 다름");
+        }
+        
+    </script>
+    
+</body>
+</html>
