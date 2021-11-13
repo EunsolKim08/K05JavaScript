@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    var getString = "1+2+3";
+   
+   function displaytResult(name){
+       getString += name;
+   }
+   function displayCal(name){
+       displaytResult(name);
+       document.getElementById("here_result").innerHTML = getString;
+   }
+   function getResult(){
+        alert('문자 결과는'+ getString);
+       var sum = eval(getString);
+       alert('eval 결과는'+sum);
+   }
+    </script>
+</head>
+<body>
+    <input type="button" value="결과" onclick="getResult();">
+</body>
+</html>

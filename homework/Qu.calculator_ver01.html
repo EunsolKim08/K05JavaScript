@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu.calculator_ver01.html</title>
+</head>
+<style>
+    table{
+        background-color: gainsboro;
+        font-weight: bold;
+        text-align: center;
+        width: 420px;
+        height: 360px;
+        border-radius: 10px;
+        margin: 100px;
+    }
+    .res{
+        background-color: #75BC00;
+        border-radius: 10px;
+        text-align: right;
+        font-size: 35px;
+        width: 100px;
+        height: 70px;
+        padding-right: 15px;
+    }
+    .BC{
+        background-color: gray;
+        border-radius: 10px;
+        color: white;
+        font-size: 22px;
+        width: 200px;
+        height: 50px;
+        
+    }
+    .num{
+        background-color: #424242;
+        color: white;
+        border-radius: 10px;
+        font-size: 22px;
+        width: 100px;
+        height: 50px;
+    }
+    .cal{
+        background-color: #FFA000;
+        color: white;
+        border-radius: 10px;
+        font-size: 22px;
+        width: 100px;
+        height: 50px;
+    }
+</style>
+
+</head>
+<!-- 
+    숫자와 연산기호는 LCD에 같이 출력된다. (Ex : 1+2)
+    : innerHTML   => Okay
+    =을 누르면 계산의 결과가 출력된다. eval함수 => Okay
+    Backspace는 마지막 숫자 하나만 지워지고, 더 이상 숫자가 없다면 0이된다. =>Okay
+    : substring으로 마지막전까지만 남기고(인덱스 0~ num.length-1) =>Okay
+    C는 어떤 숫자이든 0이 된다. (clear) => Okay
+    나머지는 상식적인 수준에서 제작하면 된다.  
+
+ -->
+<body>
+    <script>
+        var getString = "";
+      
+        function displaytResult(name){
+            getString += name;
+        }
+        function displayCal(name){
+            if( name == '='){
+                getResult();
+                document.getElementById("here_result").innerHTML = getString;
+            }
+            else if(name == 'clean'){
+                getClear();
+                document.getElementById("here_result").innerHTML = getString;
+            }
+            else if(name == 'BC'){
+                getBackSpace();
+                document.getElementById("here_result").innerHTML = getString;
+            }
+            else{
+            displaytResult(name);
+            document.getElementById("here_result").innerHTML = getString;
+            }
+        }
+        function getResult(){
+            getString = eval(getString);
+        }
+        function getBackSpace(){
+            if( getString == null){
+                getString = "0";
+            }
+            else{
+                var length = getString.length;
+                getString = getString.substring(0,length-1);
+            }
+        }
+        function getClear(){
+            getString = "";
+        }
+       
+      
+    </script>
+<table cellspacing =6px>
+    <tr>   
+        <td class="res" colspan="4" id="here_result">  </td>
+    </tr>
+    <tr>
+        <td colspan="2"><button type="button" class="BC" onclick="displayCal('BC')">BackSpace</button></td>
+        <td colspan="2"><button type="button" class="BC" onclick="displayCal('clean');" >C</button></td>
+    </tr>
+    <tr border= 2px;>
+        <td><button type="button" class="num" value="1" onclick="displayCal('1');">1</button></td>
+        <td><button type="button" class="num" value="2" onclick="displayCal('2');">2</button></td>
+        <td><button type="button" class="num" value="3" onclick="displayCal('3');">3</button></td>
+        <td><button type="button" class="cal" value="/" onclick="displayCal('/');">/</button></td>
+    </tr>
+    <tr>
+        <td><button type="button" class="num" value="4" onclick="displayCal('4');">4</button></td>
+        <td><button type="button" class="num" value="5" onclick="displayCal('5');">5</button></td>
+        <td><button type="button" class="num" value="6" onclick="displayCal('6');">6</button></td>
+        <td><button type="button" class="cal" value="*" onclick="displayCal('*');">x</button></td>
+    </tr>
+    <tr>
+        <td><button type="button" class="num" value="7" onclick="displayCal('7');">7</button></td>
+        <td><button type="button" class="num" value="8" onclick="displayCal('8');">8</button></td>
+        <td><button type="button" class="num" value="9" onclick="displayCal('9');">9</button></td>
+        <td><button type="button" class="cal" value="+" onclick="displayCal('+');">+</button></td>
+    </tr>
+    <tr>
+        <td><button type="button" class="num" id = "equ" onclick="displayCal('=')">=</button></td>
+        <td><button type="button" class="num" value="0" onclick="displayCal('0');" >0</button></td>
+        <td><button type="button" class="num" value="." onclick="displayCal('.');">.</button></td>
+        <td><button type="button" class="cal" value="-" onclick="displayCal('-');">-</button></td>
+    </tr>
+</table>
+
+</body>
+</html>

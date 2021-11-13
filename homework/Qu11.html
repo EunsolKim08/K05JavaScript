@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu.11.html</title>
+   
+</head>
+<body id = "body1">
+    <!-- 
+         Date()객체를 사용하여 배경색이 오전이면 lightskyblue, 오후면 orange로 바뀌는 프로그램을 작성하시오.
+     -->
+
+     <script>
+         document.write("<h2>오전이면 ligthsky blue, 오후이면 orange배경</h2>");
+         document.write("<hr>");
+        var date = new Date();
+         document.write("현재시간 : " + date.getHours()+ "시 "+
+         date.getMinutes()+"분 "+date.getSeconds()+"초");
+        var bd = document.getElementById("body1");
+       
+         if(date.getHours()>=12){
+            bd.style.backgroundColor = "orange";
+         }
+         else{
+            bd.style.backgroundColor = "lightskyblue";
+         }
+     </script>
+    
+</body>
+</html>
