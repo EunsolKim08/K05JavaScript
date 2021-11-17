@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas02.html</title>
+    <script>
+    window.onload = function(){
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        ctx.font = "돋움체";
+        ctx.fillStyle= "rgba(255,0,0,1)";
+
+        ctx.strokeStyle = "red";
+        ctx.moveTo(100,20);
+        ctx.lineTo(100,180);
+        ctx.stroke();
+
+        ctx.shadowColor = "rgba(0,255,0,0.5)";
+        ctx.shadowOffsetX = 3;
+        ctx.shadowOffsetY = 8;
+        ctx.shadowFlur = 5;
+
+        ctx.textAlign = "start";
+        ctx.fillText("HTML5_Start", 100,50);
+
+        ctx.textAlign = "end";
+        ctx.fillText("HTML5_End", 100,80);
+
+        ctx.textAlign= "center";
+        ctx.fillText("HTML5_Center",100,120);
+
+        ctx.textAlign= "left";
+        ctx.fillText("HTML5_Left",100,150);
+
+        ctx.textAlign= "right";
+        ctx.fillText("HTML5_right",100,180);
+    }
+</script>
+</head>
+<body>
+    <h2>canvas 태그</h2>
+    <canvas id="canvas" style="border: 1px solid red;" width="200" height="200">
+        <p>canvas가 지원되지 않는 브라우저 입니다.</p>
+    </canvas>
+    
+</body>
+</html>

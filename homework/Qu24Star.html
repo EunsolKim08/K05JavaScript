@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Qu24Star.html</title>
+
+    <script>
+        document.write("<h2>별 문자 출력하기<h2>");
+        document.write("<hr>");
+        var input = prompt("양의 정수를 입력하세요.");
+        printStar(input);
+        function printStar(num){
+            /*
+            매개변수로 전달된 값이 양의정수이고 숫자인지 확인한다.
+            */
+            if(num<=0 || isNaN(num)){
+                alert('입력오류입니다.');
+                return;
+            }
+            else{
+                // for(var i = 0; i<=num;i++){
+                //     for(var j = 0; j<=num; j++){
+                //         if(i>j){
+                //          document.write("*");
+                //         }
+                //      }
+                //  document.write("<br>");
+                // }   
+
+                // for(var x = 1; x<=num;x++){
+                //     for(var y = 1; y<=num; y++){
+                //         if(x<y){
+                //     document.write("*");
+                //          }      
+                //     }   
+                //     document.write("<br>");
+                // }
+
+                var starCnt = 0;
+                var totalCnt = num*2;
+                for(var i = 1; i<totalCnt; i++){
+                    if(i<=num){
+                        //변수 i가 num이 될때까지는 증가하면서 *출력
+                        starCnt = i;
+                        console.log("반복횟수", starCnt);
+                    }else{
+                        //num을 넘어가면 감소하면서 *출력
+                        starCnt= (totalCnt) - i;
+                        console.log("반복횟수", starCnt);
+                    }
+
+                    //앞에서 계산한 starCnt만큼 *를 출력
+                    while(starCnt>0){
+                        document.write("*");
+                        starCnt--;
+                    }
+                    //한 행을 출력하면 줄바꿈처리
+                    document.write("<br>");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

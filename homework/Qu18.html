@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Qu18.html</title>
+    <script>
+        
+        var array = new Array();
+        var array1 = new Array();
+        var array2 = new Array();
+        window.onload= function(){
+
+            var quArr = document.getElementsByClassName("qu");
+            var x= quArr[0].innerHTML; // 코드 확인용
+            
+            array =  (quArr[0].innerHTML).split('=');
+            array1=  (quArr[1].innerHTML).split('=');
+            array2=  (quArr[2].innerHTML).split('=');
+        }
+        function calculate2(num){
+            var anArr = document.getElementsByClassName("answer");
+            if(num == 0)
+                anArr[0].innerHTML = eval(array[0]);
+            if(num == 1)
+                anArr[1].innerHTML = eval(array1[0]);
+            if(num == 2)
+                anArr[2].innerHTML = eval(array2[0]);
+        }
+
+        //해석
+        function cal(obj, str){
+            var result = eval(str);
+            obj.innerText = result;
+        }
+    </script>
+</head>
+<body>
+    <body>
+        <h3>계산해봅시다</h3>
+        <hr>
+        <p class="qu">2 + 4 = <span onclick="calculate2(0);" class="answer">답</span></p>
+        <!-- <p>2 + 4 = <span onclick="cal(this, 2+4);" class="answer">답</span></p> -->
+        <p class="qu">4 * 20 + 64 = <span onclick="calculate2(1);" class="answer" >답</span></p>
+        <!-- <p >4 * 20 + 64 = <span onclick="cal(this, '4*20+64');" class="answer" >답</span></p> -->
+        <p class="qu">20/5-8*2 = <span onclick="calculate2(2);" class="answer" >답</span></p>
+        <!-- <p class="qu">20/5-8*2 = <span onclick="cal(this, '20/5-8*2');" class="answer" >답</span></p> -->
+    </body>
+</body>
+</html>

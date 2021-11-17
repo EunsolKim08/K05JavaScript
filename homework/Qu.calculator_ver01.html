@@ -32,7 +32,7 @@
         font-size: 22px;
         width: 200px;
         height: 50px;
-        
+       
     }
     .num{
         background-color: #424242;
@@ -51,9 +51,9 @@
         height: 50px;
     }
 </style>
-
+ 
 </head>
-<!-- 
+<!--
     숫자와 연산기호는 LCD에 같이 출력된다. (Ex : 1+2)
     : innerHTML   => Okay
     =을 누르면 계산의 결과가 출력된다. eval함수 => Okay
@@ -61,12 +61,12 @@
     : substring으로 마지막전까지만 남기고(인덱스 0~ num.length-1) =>Okay
     C는 어떤 숫자이든 0이 된다. (clear) => Okay
     나머지는 상식적인 수준에서 제작하면 된다.  
-
+ 
  -->
 <body>
     <script>
         var getString = "";
-      
+     
         function displayResult(name){
             getString += name;
         }
@@ -87,10 +87,10 @@
             }
             else if((name == '+') || (name == '-')|| (name == '*') || (name == '/') || (name == '.') ){
                 if(getString != ""){
-                   if(checkCal() == false){  // => 마지막 문자열이 숫자여야지만 연산부호를 쓸 수 있도록 확인함.
+                //    if((checkCal() == false)){  // => 마지막 문자열이 숫자여야지만 연산부호를 쓸 수 있도록 확인함.
                     displayResult(name);
                     document.getElementById("here_result").innerHTML = getString;  
-                    }
+                    // }
                 }
             }
             else {
@@ -98,36 +98,35 @@
                 document.getElementById("here_result").innerHTML = getString;  
             }
         }
-        function checkCal(){
+        function checkCal(){   
             if(isNaN(getString[getString.length-1] )== false){
-                // document.write("number타입임을 확인"); 
+                // document.write("number타입임을 확인");
                 return false;
             }
             else{
                 // document.write("문자열 타입임을 확인");
                 return true;
             }
+            
         }
         function getResult(){
             getString = eval(getString);
         }
         function getBackSpace(){
+            var length = getString.length;
             if( getString == null){
                 getString = "0";
             }
             else{
-                var length = getString.length;
                 getString = getString.substring(0,length-1);
             }
         }
         function getClear(){
             getString = "";
         }
-       
-      
     </script>
 <table cellspacing =6px>
-    <tr>   
+    <tr>  
         <td class="res" colspan="4" id="here_result">  </td>
     </tr>
     <tr>
@@ -159,5 +158,6 @@
         <td><button type="button" class="cal" value="-" onclick="displayCal('-');">-</button></td>
     </tr>
 </table>
+ 
 </body>
 </html>
