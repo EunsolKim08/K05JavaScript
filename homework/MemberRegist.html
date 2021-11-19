@@ -18,45 +18,46 @@
         .btn_search:hover{background-color: #6d6d6d;}        
         .btn_submit{width:120px;height:28px;font-weight:bold;cursor:pointer;background-color: #E70E16;color:white;font-size: 14px;}
         .btn_cancel{width:120px;height:28px;font-weight:bold;cursor:pointer;background-color: #464646;color:white;font-size: 14px;}
-        .w20{width:20px;} .w30{width:30px;} .w40{width:40px;} .w50{width:50px;} .w100{width:100px;} 
-        .w300{width:300px;} .w510{width:510px;} .w410{width:410px;} 
-        #id_loading{position:absolute;top:530px;z-index:10;width:100%;text-align:center;display:block;}
+        .w20{width:20px;} .w30{width:30px;} .w40{width:40px;} .w50{width:50px;} .w100{width:100px;}
+        .w300{width:300px;} .w510{width:510px;} .w410{width:410px;}
+        #id_loading{position:absolute;top:530px;z-index:10;width:100%;text-align:center;display:none;}
         #birth2{
             text-align: center;
         }
     </style>
-    
+   
        <script>
             function validate(frm){
-                
+               
                 if(frm.id.value==""){
                 alert("아이디를 입력해주세요");
                 frm.id.focus();
                 return false;
                 }
-                // if(!(frm.btn_search2.value == "true")){
-                //     alert("아이디 중복확인을 해주세요.");
-                //     frm.btn_search2.focus();
-                //     return false;
-                // }
+
+                var user_id = document.getElementsByClassName("userInput");
+                var idArray = new Array();
+                     
+                idArray = user_id[0].value;
+                   
                 if(frm.pass1.value==""){
                 alert("비밀번호를 입력해주세요");
                 frm.pass1.focus();
                 return false;
                 }
-
+ 
                 if(frm.pass2.value==""){
                 alert("비밀번호 확인을 입력해주세요");
                 frm.pass2.focus();
                 return false;
                 }
-
+ 
                 if(frm.pass1.value != frm.pass2.value){
                 alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
                 frm.pass2.focus();
                 return false;
                 }
-
+ 
                 if(frm.name.value==""){
                 alert("이름을 입력해주세요");
                 frm.name.focus();
@@ -97,12 +98,46 @@
                 frm.etc_no2.focus();
                 return false;
                 }
+               /*
+               중간에 확실히 모든 값을 발견하기전에 return true를 넣어리면 행이 끝나버린다.
+               따라서 틀린부분만 false값을 처리할 수 있도록 해야한다.
+               
+               만약 앞에서 id코드 맞으면 return
+               */
+
+               for(var i = 0; i<idArray.length;i++){
+                     if(!((idArray[i] >='A' && idArray[i]<='Z') || (idArray[i] >='a' && idArray[i]<='z')
+                        || (idArray[i] >=0 && idArray[i]<=9))){
+                            alert('아이디값은 숫자 또는 문자로만 입력해야합니다.');
+                             return false;
+                    }
+                 }
+ 
+                 if(idArray.length >=8 && idArray.length<=12){
+                    if((idArray[0] >='A' && idArray[0]<='Z') || (idArray[0] >='a' && idArray[0]<='z')){  
+                        // alert('아이디 사용이 가능합니다.'); // alert(idArray[0]); =>확인용
+                        // 여기서 return true;를 넣어버리면 만약 id 검증을 먼저 할 시에
+                        //id 값이 옳으면 그대로 return 해버린다. 따라서 함수의 모든 값이 옳았을때 return true;할 수 있어야 한다.
+                    }
+                    else{
+                            alert('아이디의 첫문자는 숫자로 시작할수 없습니다.');
+                            return false;
+                        }
+                    }
+                else{
+                        alert('아이디는 8~12자사이로 입력해야 합니다.');
+                        return false;
+                }
+                
+                document.getElementById("id_loading").style.display = 'block';
+                // return false;  => 로딩 이미지를 확인하기 위해서는 일시적으로 return false 한 후에 확인해야함.
+                return true;// 앞의 모든 값과 과정이 옳았을때 return true를 넣어야함. 함수 중간에 옳다고해서 무작정 return true; 넣지 않기.
             }
         </script>
    
 </head>
 <body>
-    <form name="myform" action="./join_write_end1stp.php" method="POST" onsubmit="return validate(this);">
+    <form name="myform" action="" method="get" onsubmit="return validate(this);">
         <table class="userTable">
             <colgroup>
                 <col width="130px" />
@@ -110,33 +145,7 @@
             </colgroup>
             <script>
                 function idOk(){
-                    var user_id = document.getElementsByClassName("userInput");
-                    var idArray = new Array();
-                    
-                    // alert('유저아이디값'+ user_id[0].value); =>확인문장
-                    idArray = user_id[0].value;
-                    
-                    for(var i = 0; i<idArray.length;i++){
-                        if(!((idArray[i] >='A' && idArray[i]<='Z') || (idArray[i] >='a' && idArray[i]<='z')
-                            || (idArray[i] >=0 && idArray[i]<=9))){
-                                alert('아이디값은 숫자 또는 문자로만 입력해야합니다.');
-                                return false;
-                        }
-                    }
-
-                    if(idArray.length >=8 && idArray.length<=12){
-                        if((idArray[0] >='A' && idArray[0]<='Z') || (idArray[0] >='a' && idArray[0]<='z')){   
-                            alert('아이디 사용이 가능합니다.'); // alert(idArray[0]); =>확인용
-                            return true;
-                        }else{
-                            alert('아이디의 첫문자는 숫자로 시작할수 없습니다.');
-                            return false;
-                        }
-                    }
-                    else{
-                        alert('아이디는 8~12자사이로 입력해야 합니다.');
-                        return false;
-                    }
+                    alert('중복을 확인함');
                 }
             </script>
             <tr>
@@ -216,7 +225,7 @@
                         <option value="11m">11</option>
                         <option value="12m">12 </option>
                     </select>월
-                    
+                   
                     <select name="birth3" id="birth3">
                         <option value="">선택</option>
                         <option value="1d">01</option>
@@ -282,13 +291,13 @@
             </tr>
             <tr>
                 <td class="userVal" style="height:25px;color:#888888;">
-                	※ hanmail.net은 메일 수신이 어려울 수 있으니 가급적 다른 메일을 이용하시기 바랍니다.
+                    ※ hanmail.net은 메일 수신이 어려울 수 있으니 가급적 다른 메일을 이용하시기 바랍니다.
                 </td>
             </tr>
             <tr>
                 <td class="userTit" rowspan="3"><span style="margin-left:10px;"></span> 주소</td>
                 <td class="userVal">
-                    <button type="button" class="btn_search" onClick="">주소찾기</button>
+                    <button type="button" class="btn_search" onClick="addressFind()">주소찾기</button>
                     <input type="text" name="zipcode" maxlength="10" value="" class="userInput w50" /> (우편번호)
                 </td>
             </tr>
@@ -308,7 +317,7 @@
                 function commonFocusMove(thisObj,strLength, nextObj){
                     var commonObj1 = document.getElementById(thisObj);
                     var commonLength = commonObj1.value.length;
-        
+       
                     if(commonLength >= strLength){
                         document.getElementById(nextObj).focus();
                     }
@@ -356,8 +365,9 @@
                         <option value="019hp">019</option>
                     </select> -
                     <input type="text" name="hphone2" id="hp2"value="" onkeyup="commonFocusMove('hp2',4,'hp3');"class="userInput w40" maxlength="4" /> -
-                    <input type="text" name="hphone3" id="hp3"value="" class="userInput w40" maxlength="4" />
-                    <span style="margin-left:20px;"></span>
+                    <!-- 여기서 this 혹은 'hp3'에서 etc_no1으로 이동이 안되는 이유는 객체와 string의 타입이 동일할 수 없기 때문임. 따라서 함수를 수정해야함. -->
+                    <input type="text" name="hphone3" id="hp3"value="" onkeyup="commonFocusMove('hp3',4,'etc_no1');" class="userInput w40" maxlength="4" /> 
+                    <span style="margin-left:20px;"></span>    
                     <label><input type="radio" name="sms" value="yes" checked />SMS 수신허용</label>
                     <label><input type="radio" name="sms" value="no" />SMS 수신불가</label>
                 </td>
@@ -391,7 +401,7 @@
                 </td>
             </tr>
         </table>
-        
+       
         <table style="width:670px; margin-top:20px;">
             <tr>
                 <td align="center">                    
@@ -401,8 +411,25 @@
                 </td>
             </tr>
         </table>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        //위의 코드는 다음API에서 가져온거임. 카카오맵에서 오픈 API등을 통해 가져올 수 있다.
+        function addressFind(){
+                   new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+
+                var frm = document.myform; // myfrom에 접근
+                frm.zipcode.value = data.zonecode; // 다음에서 주어진 12345(우편번호)
+                frm.addr1.value = data.address; //다음에서 주어진 서울시 금천구 가산동(기본주소)
+                frm.addr2.focus(); // 상세주소를 입력해야 하므로 포커스 이동.
+            }
+        }).open();
+    }
+    </script>
         <div id="id_loading">
-            <img src="./images/loading.gif" style="width:40%;" />
+            <img src="../images/loading.gif" style="width:40%;" />
         </div>
     </form>
 </body>
